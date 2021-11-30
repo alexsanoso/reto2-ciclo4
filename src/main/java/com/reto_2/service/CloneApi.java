@@ -11,6 +11,10 @@ public class CloneApi {
 
     private CloneRepository cloneRepository;
 
+    /**
+     * Metodo constructor de Clone
+     * @param cloneRepository
+     */
     public CloneApi(CloneRepository cloneRepository) {
         this.cloneRepository = cloneRepository;
     }
@@ -24,7 +28,7 @@ public class CloneApi {
     }
 
     /**
-     *
+     * Metodo para guardar un producto
      * @param clone
      * @return
     */
@@ -40,6 +44,11 @@ public class CloneApi {
         return clone;
     }
 
+    /**
+     * Metodo para obtener un producto por Id
+     * @param id
+     * @return
+     */
     public boolean getById(String id){
 
         List<Clone> clones = cloneRepository.getAll();
@@ -53,6 +62,10 @@ public class CloneApi {
         return flag;
     }
 
+    /**
+     * Metodo para eliminar un producto
+     * @param id
+     */
     public void delete(int id){
         cloneRepository.deleteById(id);
     }

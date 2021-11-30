@@ -18,27 +18,49 @@ public class CloneWeb {
 
     public CloneApi cloneApi;
 
+    /**
+     * Metodo constructor para clone
+     * @param cloneApi
+     */
     public CloneWeb(CloneApi cloneApi) {
         this.cloneApi = cloneApi;
     }
 
+    /**
+     * Metodo para obtener para obtener todos los productos
+     * @return
+     */
     @GetMapping("all")
     public List<Clone> getClones(){
         return cloneApi.getAll();
     }
 
+    /**
+     * Metodo para guardar todos los productos
+     * @param clone
+     * @return
+     */
     @PostMapping("new")
     @ResponseStatus(HttpStatus.CREATED)
     public Clone save(@RequestBody Clone clone){
         return cloneApi.save(clone);
     }
 
+    /**
+     * Metodo para actualizar un producto
+     * @param clone
+     * @return
+     */
     @PutMapping("update")
     @ResponseStatus(HttpStatus.CREATED)
     public Clone cloneUpdate(@RequestBody Clone clone){
         return cloneApi.save(clone);
     }
 
+    /**
+     * metodo para eliminar un producto
+     * @param cloneId
+     */
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id")int cloneId){

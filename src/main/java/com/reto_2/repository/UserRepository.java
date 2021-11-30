@@ -20,6 +20,11 @@ public class UserRepository {
     @Autowired
     private UserCrudRepository userCrudRepository;
 
+    /**
+     * Metodo para obtener cada usuario por Id
+     * @param id
+     * @return
+     */
     public Optional<User> getUserById(int id){
         return userCrudRepository.findById(id);
     }
@@ -41,6 +46,10 @@ public class UserRepository {
         return userCrudRepository.save(user);
     }
 
+    /**
+     * Metodo para borrar un usuario por Id
+     * @param id
+     */
     public void deleteById (Integer id){
         userCrudRepository.deleteById(id);
     }

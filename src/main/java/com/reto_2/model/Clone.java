@@ -17,6 +17,9 @@ import javax.persistence.Id;
 
 public class Clone{
 
+        /**
+         * Atributo que especifica la llave primaria Id
+         */
         @Id
         private Integer id;
         private String brand;

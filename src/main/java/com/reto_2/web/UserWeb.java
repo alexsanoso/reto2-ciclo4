@@ -63,12 +63,21 @@ public class UserWeb {
         return userApi.getByEmailPass(email, pass);
     }
 
+    /**
+     * Actualiza a un usuario en la base de datos
+     * @param user
+     * @return
+     */
     @PutMapping("update")
     @ResponseStatus(HttpStatus.CREATED)
     public User userUpdate(@RequestBody User user){
         return userApi.userUpdate(user);
     }
 
+    /**
+     * Eliminar un usuario de la base de datos por Id
+     * @param userId
+     */
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id")int userId){

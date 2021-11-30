@@ -80,6 +80,10 @@ public class UserApi {
         return noExiste;
     }
 
+    /**
+     * Borrar un usuario por id en la base de datos
+     * @param idUser
+     */
     public void delete (Integer idUser){
         Optional<User> user = userRepository.getUserById(idUser);
         if(user.isPresent()){
@@ -87,6 +91,11 @@ public class UserApi {
         }
     }
 
+    /**
+     * Actualizar un usuario de la base de datos
+     * @param user
+     * @return
+     */
     public User userUpdate(User user){
         Optional<User> exist = userRepository.getUserById(user.getId());
         if(exist.isPresent()) {

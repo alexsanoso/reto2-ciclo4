@@ -15,7 +15,9 @@ import java.io.Serializable;
 @Data
 
 public class User implements Serializable {
-
+        /**
+         * Atributo que especifica llave primaria Id
+         */
         @Id
         private Integer id;
         private String identification;
