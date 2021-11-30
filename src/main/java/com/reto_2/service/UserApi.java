@@ -102,6 +102,27 @@ public class UserApi {
             if (user.getIdentification() != null) {
                 exist.get().setIdentification(user.getIdentification());
             }
+            if(user.getName() != null){
+                exist.get().setName(user.getName());
+            }
+            if(user.getAddress() != null){
+                exist.get().setAddress(user.getAddress());
+            }
+            if(user.getCellPhone() != null){
+                exist.get().setCellPhone(user.getCellPhone());
+            }
+            if(user.getEmail() != null){
+                exist.get().setEmail(user.getEmail());
+            }
+            if(user.getPassword() != null){
+                exist.get().setPassword(user.getPassword());
+            }
+            if(user.getZone() != null){
+                exist.get().setZone(user.getZone());
+            }
+            if(user.getType() != null){
+                exist.get().setType(user.getType());
+            }
             return userRepository.save(exist.get());
         }
         return user;
