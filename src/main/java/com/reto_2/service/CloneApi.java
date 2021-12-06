@@ -1,10 +1,14 @@
 package com.reto_2.service;
 
 import com.reto_2.model.Clone;
+import com.reto_2.model.User;
 import com.reto_2.repository.CloneRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CloneApi {
@@ -19,6 +23,29 @@ public class CloneApi {
         this.cloneRepository = cloneRepository;
     }
 
+    /**
+     * Asigna una ID automatico cuando se agrega un nuevo producto
+     * @return
+     */
+    private int getMaxID() {
+        List<Clone> clones = cloneRepository.getAll();
+        ArrayList<Integer> ids = new ArrayList<>();
+        for (Clone clone: clones) {
+            ids.add(clone.getId());
+
+        } Collections.sort(ids);
+        return ids.get(ids.size()-1) + 1;
+    }
+
+    // <READ - ASIGN NEW ID>
+    public int getId() {
+        for (int i=0; i<=getMaxID(); i++) {
+            Optional<Clone> exist = cloneRepository.getCloneById(i);
+            if (exist.isEmpty()) {
+                return i;
+            }
+        } return -1;
+    }
     /**
      * Metodo para traer la lista de productos en la clase Clone
      * @return cloneRepository.getAll()

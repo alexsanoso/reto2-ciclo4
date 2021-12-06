@@ -23,6 +23,15 @@ public class UserWeb {
     private UserApi userApi;
 
     /**
+     * Metodo para asignar una id cuando se crea un usuario
+     * @return
+     */
+    @GetMapping("/newid")
+    public int getId() {
+        return userApi.getId();
+    }
+
+    /**
      * Método para obtener a todos los usuarios de la base de datos
      * @return getAll retorna a todos los usuarios
      */

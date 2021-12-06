@@ -27,6 +27,15 @@ public class CloneWeb {
     }
 
     /**
+     * Metodo para asignar una id a un producto creado
+     * @return
+     */
+    @GetMapping("/newid")
+    public int getId() {
+        return cloneApi.getId();
+    }
+
+    /**
      * Metodo para obtener para obtener todos los productos
      * @return
      */

@@ -4,6 +4,9 @@ import com.reto_2.model.User;
 import com.reto_2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +21,30 @@ public class UserApi {
      */
     @Autowired
     private UserRepository userRepository;
+
+    /**
+     * Agrega una ID automatico cuando se crea un usuario
+     * @return
+     */
+    private int getMaxID() {
+        List<User> users = userRepository.getAll();
+        ArrayList<Integer> ids = new ArrayList<>();
+        for (User user : users) {
+            ids.add(user.getId());
+
+        } Collections.sort(ids);
+        return ids.get(ids.size()-1) + 1;
+    }
+
+    // <READ - ASIGN NEW ID>
+    public int getId() {
+        for (int i=0; i<=getMaxID(); i++) {
+            Optional<User> exist = userRepository.getUserById(i);
+            if (exist.isEmpty()) {
+                return i;
+            }
+        } return -1;
+    }
 
     /**
      * Metodo para obtener todos los usuarios
