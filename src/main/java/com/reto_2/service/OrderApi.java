@@ -111,8 +111,20 @@ public class OrderApi {
     public Order orderUpdate(Order order){
         Optional<Order> exist = orderRepository.getOrderById(order.getId());
         if(exist.isPresent()) {
+            if (order.getRegisterDay() != null) {
+                exist.get().setRegisterDay(order.getRegisterDay());
+            }
             if (order.getStatus() != null) {
                 exist.get().setStatus(order.getStatus());
+            }
+            if (order.getSalesMan() != null) {
+                exist.get().setSalesMan(order.getSalesMan());
+            }
+            if (order.getProducts() != null) {
+                exist.get().setProducts(order.getProducts());
+            }
+            if (order.getQuantities() != null) {
+                exist.get().setQuantities(order.getQuantities());
             }
             return orderRepository.save(exist.get());
         }
