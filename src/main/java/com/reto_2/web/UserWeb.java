@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Alexander Sánchez Osorio
@@ -40,6 +41,15 @@ public class UserWeb {
         return userApi.getAll();
     }
 
+    /**
+     * Obtiene al usuario por id
+     * @param id
+     * @return
+     */
+    @GetMapping("{id}")
+    public Optional<User> getUserById(@PathVariable("id") int id){
+        return userApi.getUserById(id);
+    }
     /**
      * Método para guardar un usuario en base de datos
      * @param user

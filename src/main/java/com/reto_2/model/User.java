@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Alexander Sánchez Osorio
@@ -22,6 +23,8 @@ public class User implements Serializable {
         private Integer id;
         private String identification;
         private String name;
+        private Date birthtDay;
+        private String monthBirthtDay;
         private String address;
         private String cellPhone;
         private String email;

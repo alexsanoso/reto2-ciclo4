@@ -1,11 +1,15 @@
 package com.reto_2.web;
 
 import com.reto_2.model.Clone;
+import com.reto_2.model.Order;
+import com.reto_2.model.User;
 import com.reto_2.service.CloneApi;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Alexander Sánchez Osorio
@@ -39,6 +43,12 @@ public class CloneWeb {
      * Metodo para obtener para obtener todos los productos
      * @return
      */
+
+    @GetMapping("{id}")
+    public Optional<Order> getOrderById(@PathVariable("id") int id){
+        return cloneApi.getCloneById(id);
+    }
+
     @GetMapping("all")
     public List<Clone> getClones(){
         return cloneApi.getAll();

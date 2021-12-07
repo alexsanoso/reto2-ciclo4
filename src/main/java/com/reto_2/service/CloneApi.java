@@ -46,6 +46,12 @@ public class CloneApi {
             }
         } return -1;
     }
+
+    public Optional getCloneById(int id){
+        return cloneRepository.getCloneById(id);
+    }
+
+
     /**
      * Metodo para traer la lista de productos en la clase Clone
      * @return cloneRepository.getAll()

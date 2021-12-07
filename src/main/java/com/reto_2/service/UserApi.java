@@ -54,6 +54,12 @@ public class UserApi {
         return userRepository.getAll();
     }
 
+
+
+    public Optional getUserById(int id){
+        return userRepository.getUserById(id);
+    }
+
     /**
      * Guardar un usuario en la base de datos
      * @param user
