@@ -8,9 +8,14 @@ import java.util.List;
 
 public interface OrderCrudRepository extends MongoRepository<Order, Integer> {
 
+    @Query("{'salesMan.identification': ?0}")
+    List<Order> findByIdentification(final String identification);
+
     @Query("{'salesMan.zone':?0}")
     public List<Order> findByZone(String zona);
 
     @Query("{'salesMan.status':?0}")
     public List<Order> findByStatus(String status);
+
+
 }

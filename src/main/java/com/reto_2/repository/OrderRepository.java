@@ -75,5 +75,9 @@ public class OrderRepository {
     public void deleteById (Integer id){
         orderCrudRepository.deleteById(id);
     }
+
+    public List<Order> findByIdentification(String identification) {
+        return orderCrudRepository.findByIdentification(identification);
+    }
 }
 

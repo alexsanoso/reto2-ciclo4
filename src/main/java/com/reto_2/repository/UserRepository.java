@@ -54,4 +54,14 @@ public class UserRepository {
         userCrudRepository.deleteById(id);
     }
 
+
+    /**
+     * Metodo para buscar por identificacion de usuario
+     * @param identificacion
+     * @return
+     */
+    public Optional<User> findByIdentificacion(String identificacion){
+        return userCrudRepository.findByIdentificacion(identificacion);
+    }
+
 }

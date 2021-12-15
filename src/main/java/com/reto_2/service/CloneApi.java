@@ -24,33 +24,13 @@ public class CloneApi {
     }
 
     /**
-     * Asigna una ID automatico cuando se agrega un nuevo producto
+     * Trae un producto por id
+     * @param id
      * @return
      */
-    private int getMaxID() {
-        List<Clone> clones = cloneRepository.getAll();
-        ArrayList<Integer> ids = new ArrayList<>();
-        for (Clone clone: clones) {
-            ids.add(clone.getId());
-
-        } Collections.sort(ids);
-        return ids.get(ids.size()-1) + 1;
-    }
-
-    // <READ - ASIGN NEW ID>
-    public int getId() {
-        for (int i=0; i<=getMaxID(); i++) {
-            Optional<Clone> exist = cloneRepository.getCloneById(i);
-            if (exist.isEmpty()) {
-                return i;
-            }
-        } return -1;
-    }
-
     public Optional getCloneById(int id){
         return cloneRepository.getCloneById(id);
     }
-
 
     /**
      * Metodo para traer la lista de productos en la clase Clone
@@ -68,6 +48,15 @@ public class CloneApi {
     public Clone save(Clone clone){
 
         List<Clone> clones = cloneRepository.getAll();
+        Integer idAuto = clones.size();
+        idAuto++;
+        Optional<Clone> exist = cloneRepository.getCloneById(idAuto);
+        if (exist.isPresent()){
+            return clone;
+        }
+        if (clone.getId() == null){
+            clone.setId(idAuto);
+        }
 
         if (clones.size() == 0){
             return cloneRepository.save(clone);

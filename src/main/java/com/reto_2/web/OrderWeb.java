@@ -1,7 +1,7 @@
 package com.reto_2.web;
 
+import com.reto_2.model.Clone;
 import com.reto_2.model.Order;
-import com.reto_2.model.User;
 import com.reto_2.service.OrderApi;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,17 +19,12 @@ public class OrderWeb {
 
     private OrderApi orderApi;
 
+    /**
+     * Metodo COnstructor para Ordenes
+     * @param orderApi
+     */
     public OrderWeb(OrderApi orderApi) {
         this.orderApi = orderApi;
-    }
-
-    /**
-     * Metodo para asignar una id cuando se crea una orden
-     * @return
-     */
-    @GetMapping("/newid")
-    public int getId() {
-        return orderApi.getId();
     }
 
     /**
@@ -50,6 +45,7 @@ public class OrderWeb {
     public Optional<Order> getOrderById(@PathVariable("id") int id){
         return orderApi.getOrderById(id);
     }
+
     /**
      * Método para guardar una orden en bd
      * @param order
@@ -102,4 +98,38 @@ public class OrderWeb {
         orderApi.deleteById(orderId);
     }
 
+    /**
+     * Obtiene usuarios por identificacion
+     * @param identification
+     * @return
+     */
+    @GetMapping("/identificacion/{identification}")
+    public List<Order> getOrderByIdentification(@PathVariable("identification") String identification) {
+        return orderApi.findByIdentification(identification);
+    }
+
+    /**
+     * Metodo para agregar un producto
+     * @param idOrder
+     * @param clone
+     * @return
+     */
+    @PutMapping("/add/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Order addProduct(@PathVariable("id") Integer idOrder, @RequestBody Optional<Clone> clone) {
+        return orderApi.addProduct(clone, idOrder);
+    }
+
+    /**
+     * Metodo para agregar cantidad
+     *
+     * @param idOrder
+     * @param cantidad
+     * @return
+     */
+    @PutMapping("/cantidad/{id}/{cantidad}/{idQuantity}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Order addCantidad(@PathVariable("id") Integer idOrder, @PathVariable("cantidad") Integer cantidad, @PathVariable("idQuantity") String idQuantity) {
+        return orderApi.addCantidad(cantidad, idOrder, idQuantity);
+    }
 }

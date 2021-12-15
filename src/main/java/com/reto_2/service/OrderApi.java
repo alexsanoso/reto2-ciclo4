@@ -1,15 +1,11 @@
 package com.reto_2.service;
 
+import com.reto_2.model.Clone;
 import com.reto_2.model.Order;
-import com.reto_2.model.User;
 import com.reto_2.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author Alexander Sánchez Osorio
@@ -21,32 +17,6 @@ public class OrderApi {
 
     public OrderApi(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-    }
-
-    /**
-     * Metodos para crear un ID automatico, cuando se crea una orden
-     * @return
-     */
-
-
-    private int getMaxID() {
-        List<Order> orders = orderRepository.getAll();
-        ArrayList<Integer> ids = new ArrayList<>();
-        for (Order order: orders) {
-            ids.add(order.getId());
-
-        } Collections.sort(ids);
-        return ids.get(ids.size()-1) + 1;
-    }
-
-    // <READ - ASIGN NEW ID>
-    public int getId() {
-        for (int i=0; i<=getMaxID(); i++) {
-            Optional<Order> exist = orderRepository.getOrderById(i);
-            if (exist.isEmpty()) {
-                return i;
-            }
-        } return -1;
     }
 
     /**
@@ -91,6 +61,17 @@ public class OrderApi {
      */
     public Order save(Order order){
 
+        List<Order> orders = orderRepository.getAll();
+        Integer idAuto = orders.size();
+        idAuto++;
+        Optional<Order> exist = orderRepository.getOrderById(idAuto);
+        if (exist.isPresent()){
+            return order;
+        }
+        if (order.getId() == null){
+            order.setId(idAuto);
+        }
+
         if(order.getId() == null){
             return orderRepository.save(order);
         }else{
@@ -131,10 +112,103 @@ public class OrderApi {
         return order;
     }
 
+    /**
+     * Metodo para borrar una orden por id
+     * @param idOrder
+     */
     public void deleteById (Integer idOrder){
         Optional<Order> order = orderRepository.getOrderById(idOrder);
         if(order.isPresent()){
             orderRepository.deleteById(idOrder);
+        }
+    }
+
+    /**
+     * Metodo para listar por identificacion de usuario
+     * @param identification
+     * @return
+     */
+    public List<Order> findByIdentification(String identification) {
+        return orderRepository.findByIdentification(identification);
+    }
+
+    /**
+     * Metodo para agregar un producto
+     *
+     * @param clone
+     * @param idOrder
+     * @return
+     */
+    public Order addProduct(Optional<Clone> clone, Integer idOrder) {
+        if (clone.isPresent()) {
+            Optional<Order> exist = orderRepository.getOrderById(idOrder);
+            Map<Integer, Clone> products = exist.get().getProducts();
+            Integer var = 0;
+            Set<Integer> keys = products.keySet();
+
+            ArrayList<Integer> claves = new ArrayList<>();
+            for (Integer key : keys) {
+                claves.add(key);
+            }
+            Collections.sort(claves);
+            int mayorKey = 0;
+            for (Integer clave : claves) {
+
+                if (clave > mayorKey) {
+                    mayorKey = clave;
+                }
+            }
+            var = mayorKey + 1;
+
+            products.put(var, clone.get());
+            exist.get().setProducts(products);
+            return orderRepository.save(exist.get());
+        } else {
+            return Order.builder().build();
+        }
+    }
+
+    /**
+     * Metodo para agregar cantidad
+     *
+     * @param cantidad
+     * @param idOrder
+     * @return
+     */
+    public Order addCantidad(Integer cantidad, Integer idOrder, String idQuantity) {
+        if (cantidad > 0) {
+            Optional<Order> exist = orderRepository.getOrderById(idOrder);
+            Map<String, Integer> cantidades = exist.get().getQuantities();
+            Integer var = 0;
+            if (cantidades.isEmpty()) {
+                var = cantidades.size() + 1;
+            } else if (cantidades.containsKey(idQuantity)){
+                cantidades.put(idQuantity, cantidad);
+                exist.get().setQuantities(cantidades);
+                return orderRepository.save(exist.get());
+            }else {
+                Set<String> keys = cantidades.keySet();
+                ArrayList<String> claves = new ArrayList<>();
+                for (String key : keys) {
+                    claves.add(key);
+                }
+                Collections.sort(claves);
+                int mayorKey = 0;
+                int claveInt;
+                for (String clave : claves) {
+                    claveInt = Integer.parseInt(clave);
+                    if (claveInt > mayorKey) {
+                        mayorKey = claveInt;
+                    }
+                }
+                var = mayorKey + 1;
+            }
+            cantidades.put(var + "", cantidad);
+            exist.get().setQuantities(cantidades);
+
+            return orderRepository.save(exist.get());
+        } else {
+            return Order.builder().build();
         }
     }
 }

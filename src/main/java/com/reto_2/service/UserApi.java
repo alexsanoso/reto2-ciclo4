@@ -5,8 +5,6 @@ import com.reto_2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,30 +21,6 @@ public class UserApi {
     private UserRepository userRepository;
 
     /**
-     * Agrega una ID automatico cuando se crea un usuario
-     * @return
-     */
-    private int getMaxID() {
-        List<User> users = userRepository.getAll();
-        ArrayList<Integer> ids = new ArrayList<>();
-        for (User user : users) {
-            ids.add(user.getId());
-
-        } Collections.sort(ids);
-        return ids.get(ids.size()-1) + 1;
-    }
-
-    // <READ - ASIGN NEW ID>
-    public int getId() {
-        for (int i=0; i<=getMaxID(); i++) {
-            Optional<User> exist = userRepository.getUserById(i);
-            if (exist.isEmpty()) {
-                return i;
-            }
-        } return -1;
-    }
-
-    /**
      * Metodo para obtener todos los usuarios
      * @return userRepository
      */
@@ -54,8 +28,11 @@ public class UserApi {
         return userRepository.getAll();
     }
 
-
-
+    /**
+     * Metodo para traer un usuario por id
+     * @param id
+     * @return
+     */
     public Optional getUserById(int id){
         return userRepository.getUserById(id);
     }
@@ -68,6 +45,15 @@ public class UserApi {
     public User save(User user){
 
         List<User> users = userRepository.getAll();
+        Integer idAuto = users.size();
+        idAuto++;
+        Optional<User> exist = userRepository.getUserById(idAuto);
+        if (exist.isPresent()){
+            return user;
+        }
+        if (user.getId() == null){
+            user.setId(idAuto);
+        }
 
         if (users.size() == 0){
             return userRepository.save(user);
@@ -129,6 +115,7 @@ public class UserApi {
      * @param user
      * @return
      */
+
     public User userUpdate(User user){
         Optional<User> exist = userRepository.getUserById(user.getId());
         if(exist.isPresent()) {
@@ -159,5 +146,15 @@ public class UserApi {
             return userRepository.save(exist.get());
         }
         return user;
+    }
+
+    /**
+     * metodo para buscar por identificacion del usuario
+     * @param identificacion
+     * @return
+     */
+    public Optional<User> getbyidentificacion(String identificacion) {
+
+        return userRepository.findByIdentificacion(identificacion);
     }
 }

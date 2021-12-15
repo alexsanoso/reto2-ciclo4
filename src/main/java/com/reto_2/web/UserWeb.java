@@ -24,15 +24,6 @@ public class UserWeb {
     private UserApi userApi;
 
     /**
-     * Metodo para asignar una id cuando se crea un usuario
-     * @return
-     */
-    @GetMapping("/newid")
-    public int getId() {
-        return userApi.getId();
-    }
-
-    /**
      * Método para obtener a todos los usuarios de la base de datos
      * @return getAll retorna a todos los usuarios
      */
@@ -50,6 +41,7 @@ public class UserWeb {
     public Optional<User> getUserById(@PathVariable("id") int id){
         return userApi.getUserById(id);
     }
+
     /**
      * Método para guardar un usuario en base de datos
      * @param user
@@ -102,4 +94,15 @@ public class UserWeb {
     public void delete(@PathVariable("id")int userId){
         userApi.delete(userId);
     }
+
+    /**
+     * Obtiene usuarios por identificacion
+     * @param identificacion
+     * @return
+     */
+    @GetMapping("identificacion/{identificacion}")
+    public Optional<User> getByIdentificacion(@PathVariable("identificacion") String identificacion) {
+        return userApi.getbyidentificacion(identificacion);
+    }
+
 }
