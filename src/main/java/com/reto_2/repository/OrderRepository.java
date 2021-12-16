@@ -76,6 +76,11 @@ public class OrderRepository {
         orderCrudRepository.deleteById(id);
     }
 
+    /**
+     * Obtiene un usuario por identificacion
+     * @param identification
+     * @return
+     */
     public List<Order> findByIdentification(String identification) {
         return orderCrudRepository.findByIdentification(identification);
     }
