@@ -157,4 +157,14 @@ public class OrderWeb {
         return orderApi.getByRegisterDayAndSalesManId(date, id);
     }
 
+    /**
+     * Metodo para buscar una order por id de asesor
+     * @param id
+     * @return
+     */
+    @GetMapping("/salesman/{id}")
+    public List<Order> getsalesmanById(@PathVariable("id") Integer id){
+        return orderApi.orderById(id);
+    }
+
 }

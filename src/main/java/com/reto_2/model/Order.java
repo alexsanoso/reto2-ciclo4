@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Map;
 
 @Document(collection = "orders")

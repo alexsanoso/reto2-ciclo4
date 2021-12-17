@@ -1,6 +1,7 @@
 package com.reto_2.repository.crud;
 
 import com.reto_2.model.Order;
+import com.reto_2.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -33,6 +34,15 @@ public interface OrderCrudRepository extends MongoRepository<Order, Integer> {
     List<Order> findByStatus(String status);
 
     /**
+     * Método para obtener la lista de órdenes por Id de asesor
+     *
+     * @param id
+     * @return
+     */
+    List<Order> findBySalesManId(Integer id);
+
+
+    /**
      * Método para obtener las órdenes con un estado específico de un asesor por ID
      *
      * @param id
@@ -49,6 +59,8 @@ public interface OrderCrudRepository extends MongoRepository<Order, Integer> {
      * @return
      */
     List<Order> findByRegisterDayContainsAndSalesManId(String registerDay, Integer id);
+
+
 
 
 }

@@ -2,6 +2,7 @@ package com.reto_2.service;
 
 import com.reto_2.model.Clone;
 import com.reto_2.model.Order;
+import com.reto_2.model.User;
 import com.reto_2.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class OrderApi {
     }
 
     /**
-     * Metodo para traer una orden por Id
+     * Metodo para traer todas las ordenes por Id
      * @param id
      * @return
      */
@@ -213,6 +214,19 @@ public class OrderApi {
     }
 
     /**
+     * Metodo para busca el id del Asesor
+     *
+     * @param id
+     * @return
+     */
+
+    public List<Order> orderById(Integer id) {
+        return orderRepository.findBySalesManId(id);
+
+    }
+
+
+    /**
      * Metodo para buscar el registro y el id del asesor
      *
      * @param registerDay
@@ -234,5 +248,6 @@ public class OrderApi {
     public List<Order> orderBySalesManStatusAndId(String status, Integer idUser) {
         return orderRepository.findByStatus(idUser, status);
     }
+
 
 }

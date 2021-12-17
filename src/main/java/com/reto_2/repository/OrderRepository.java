@@ -1,6 +1,7 @@
 package com.reto_2.repository;
 
 import com.reto_2.model.Order;
+import com.reto_2.model.User;
 import com.reto_2.repository.crud.OrderCrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -103,6 +104,15 @@ public class OrderRepository {
      */
     public List<Order> findByRegisterDay(String date, Integer idUser){
         return orderCrudRepository.findByRegisterDayContainsAndSalesManId(date, idUser);
+    }
+
+    /**
+     * Metodo para traer una orden por id de asesor
+     * @param id
+     * @return
+     */
+    public List<Order> findBySalesManId(Integer id){
+        return orderCrudRepository.findBySalesManId(id);
     }
 }
 
