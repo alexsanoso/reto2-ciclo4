@@ -84,5 +84,13 @@ public class OrderRepository {
     public List<Order> findByIdentification(String identification) {
         return orderCrudRepository.findByIdentification(identification);
     }
+
+    public List<Order> findByStatus (Integer idUser, String status){
+        return orderCrudRepository.findBySalesManIdAndStatus(idUser, status);
+    }
+
+    public List<Order> findByRegisterDay(String date, Integer idUser){
+        return orderCrudRepository.findByRegisterDayContainsAndSalesManId(date, idUser);
+    }
 }
 

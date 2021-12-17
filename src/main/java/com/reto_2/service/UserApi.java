@@ -157,4 +157,17 @@ public class UserApi {
 
         return userRepository.findByIdentificacion(identificacion);
     }
+
+    /**
+     * Método para listar usuarios por mes de cumpleaños
+     *
+     * @param month
+     * @return
+     */
+    public List<User> userByMonth(String month) {
+        return userRepository.findByMonth(month);
+    }
+
+
+
 }

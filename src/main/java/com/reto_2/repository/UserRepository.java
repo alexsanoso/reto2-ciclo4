@@ -64,4 +64,8 @@ public class UserRepository {
         return userCrudRepository.findByIdentificacion(identificacion);
     }
 
+    public List<User> findByMonth (String month){
+        return userCrudRepository.findByMonthBirthtDay(month);
+    }
+
 }

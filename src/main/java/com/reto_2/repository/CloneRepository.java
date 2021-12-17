@@ -54,4 +54,22 @@ public class CloneRepository {
         cloneCrudRepository.deleteById(id);
     }
 
+    /**
+     * Meetodo para listar productos por precio maximo
+     * @param price
+     * @return
+     */
+    public List<Clone> findByPrice (Double price){
+        return cloneCrudRepository.findCloneByPriceIsLessThanEqual(price);
+    }
+
+    /**
+     * Metodo para listar productos por descripcion
+     * @param description
+     * @return
+     */
+    public List<Clone> findByDesc (String description){
+        return cloneCrudRepository.findCloneByDescriptionRegex(description);
+    }
+
 }

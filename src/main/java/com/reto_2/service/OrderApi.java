@@ -211,4 +211,28 @@ public class OrderApi {
             return Order.builder().build();
         }
     }
+
+    /**
+     * Metodo para buscar el registro y el id del asesor
+     *
+     * @param registerDay
+     * @param id
+     * @return
+     */
+    public List<Order> getByRegisterDayAndSalesManId(String registerDay, Integer id) {
+        return orderRepository.findByRegisterDay(registerDay , id);
+
+    }
+
+    /**
+     * Metodo para busca el asesor por estado y id
+     *
+     * @param idUser
+     * @return
+     */
+
+    public List<Order> orderBySalesManStatusAndId(String status, Integer idUser) {
+        return orderRepository.findByStatus(idUser, status);
+    }
+
 }

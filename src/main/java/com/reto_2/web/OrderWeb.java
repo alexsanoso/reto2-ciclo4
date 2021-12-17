@@ -132,4 +132,29 @@ public class OrderWeb {
     public Order addCantidad(@PathVariable("id") Integer idOrder, @PathVariable("cantidad") Integer cantidad, @PathVariable("idQuantity") String idQuantity) {
         return orderApi.addCantidad(cantidad, idOrder, idQuantity);
     }
+
+    /**
+     * Metodo para buscar el id y el estado de un Asesor
+     *
+     * @param status
+     * @param id
+     * @return
+     */
+    @GetMapping("/state/{status}/{id}")
+    public List<Order> getByStatusId(@PathVariable("status") String status, @PathVariable("id") Integer id) {
+        return orderApi.orderBySalesManStatusAndId(status, id);
+    }
+
+    /**
+     * Mmetodo para buscar id y fecha del Asesor
+     *
+     * @param date
+     * @param id
+     * @return
+     */
+    @GetMapping("/date/{date}/{id}")
+    public List<Order> getByDateId(@PathVariable("date") String date, @PathVariable("id") Integer id) {
+        return orderApi.getByRegisterDayAndSalesManId(date, id);
+    }
+
 }

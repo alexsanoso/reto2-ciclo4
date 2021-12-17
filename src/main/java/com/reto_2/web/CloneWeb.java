@@ -75,4 +75,27 @@ public class CloneWeb {
     public void delete(@PathVariable("id")int cloneId){
         cloneApi.delete(cloneId);
     }
+
+    /**
+     * Listar clones por un String enviado, si se encuentra en su descripción
+     *
+     * @param description
+     * @return
+     */
+    @GetMapping("description/{desc}")
+    public List<Clone> cloneByDesc(@PathVariable("desc") String description) {
+        return cloneApi.cloneByDesc(description);
+    }
+
+    /**
+     * Listar clones que tengan un precio menor o igual al ingresado
+     *
+     * @param price
+     * @return
+     */
+    @GetMapping("price/{price}")
+    public List<Clone> cloneByPrice(@PathVariable("price") Double price) {
+        return cloneApi.cloneByPrice(price);
+    }
+
 }

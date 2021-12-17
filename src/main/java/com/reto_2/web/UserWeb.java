@@ -105,4 +105,16 @@ public class UserWeb {
         return userApi.getbyidentificacion(identificacion);
     }
 
+    /**
+     * Método para listar usuarios cuyo mes de cumpleaños sea el ingresado
+     *
+     * @param month
+     * @return
+     */
+    @GetMapping("birthday/{month}")
+    public List<User> userByMonth(@PathVariable("month") String month) {
+        return userApi.userByMonth(month);
+    }
+
+
 }

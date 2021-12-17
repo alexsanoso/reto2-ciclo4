@@ -91,4 +91,25 @@ public class CloneApi {
     public void delete(int id){
         cloneRepository.deleteById(id);
     }
+
+
+    /**
+     * Metodo para listar Productos por descripcion
+     * @param description
+     * @return
+     */
+    public List<Clone> cloneByDesc(String description) {
+        return cloneRepository.findByDesc("(?i)" + description );
+    }
+
+    /**
+     * Listar Clones que tengan un precio menor o igual al ingresado
+     *
+     * @param price
+     * @return
+     */
+    public List<Clone> cloneByPrice(Double price) {
+        return cloneRepository.findByPrice(price);
+    }
+
 }

@@ -24,7 +24,7 @@ public class Order implements Serializable {
 
         @Id
         private Integer id;
-        private Date registerDay;
+        private String registerDay;
         private String status;
         private User salesMan;
         private Map<Integer, Clone> products;
