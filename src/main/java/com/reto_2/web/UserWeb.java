@@ -34,12 +34,12 @@ public class UserWeb {
 
     /**
      * Obtiene al usuario por id
-     * @param id
+     * @param idUser
      * @return
      */
     @GetMapping("{id}")
-    public Optional<User> getUserById(@PathVariable("id") int id){
-        return userApi.getUserById(id);
+    public Optional<User> getUserById(@PathVariable("id") int idUser){
+        return userApi.getUserById(idUser);
     }
 
     /**
@@ -115,6 +115,4 @@ public class UserWeb {
     public List<User> userByMonth(@PathVariable("month") String month) {
         return userApi.userByMonth(month);
     }
-
-
 }
