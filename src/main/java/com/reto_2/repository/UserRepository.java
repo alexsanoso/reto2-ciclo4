@@ -64,6 +64,11 @@ public class UserRepository {
         return userCrudRepository.findByIdentificacion(identificacion);
     }
 
+    /**
+     * Metodo para listar usuarios por mes
+     * @param month
+     * @return
+     */
     public List<User> findByMonth (String month){
         return userCrudRepository.findByMonthBirthtDay(month);
     }

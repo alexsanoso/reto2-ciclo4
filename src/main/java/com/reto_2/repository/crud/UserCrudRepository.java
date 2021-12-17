@@ -12,6 +12,11 @@ import java.util.Optional;
  */
 public interface UserCrudRepository extends MongoRepository<User, Integer> {
 
+    /**
+     * Metodo para listar usuarios por Identificacion
+     * @param identification
+     * @return
+     */
     @Query("{'identification': ?0}")
     Optional<User> findByIdentificacion(final String identification);
 

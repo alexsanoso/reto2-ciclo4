@@ -85,10 +85,22 @@ public class OrderRepository {
         return orderCrudRepository.findByIdentification(identification);
     }
 
+    /**
+     * Metodo para listar ordenes por estado
+     * @param idUser
+     * @param status
+     * @return
+     */
     public List<Order> findByStatus (Integer idUser, String status){
         return orderCrudRepository.findBySalesManIdAndStatus(idUser, status);
     }
 
+    /**
+     * Metodo para listar ordenes por fecha
+     * @param date
+     * @param idUser
+     * @return
+     */
     public List<Order> findByRegisterDay(String date, Integer idUser){
         return orderCrudRepository.findByRegisterDayContainsAndSalesManId(date, idUser);
     }

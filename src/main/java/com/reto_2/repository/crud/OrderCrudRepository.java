@@ -8,12 +8,27 @@ import java.util.List;
 
 public interface OrderCrudRepository extends MongoRepository<Order, Integer> {
 
+    /**
+     * Metodo para listar ordenes por identificacoin de usuarios
+     * @param identification
+     * @return
+     */
     @Query("{'salesMan.identification': ?0}")
     List<Order> findByIdentification(final String identification);
 
+    /**
+     * Metodo para listar ordenes por zona
+     * @param zona
+     * @return
+     */
     @Query("{'salesMan.zone':?0}")
     List<Order> findByZone(String zona);
 
+    /**
+     * Metodo para listar ordenes por estado
+     * @param status
+     * @return
+     */
     @Query("{'salesMan.status':?0}")
     List<Order> findByStatus(String status);
 
